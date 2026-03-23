@@ -1,351 +1,837 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CuCat - Pet Care Food Products</title>
-  <style>
-    :root {
-      --bg: #f5f5f7;
-      --text: #1d1d1f;
-      --muted: #6e6e73;
-      --accent: #0071e3;
-      --white: #fff;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CuCat - อาหารแมวจากกุ้งก้ามกรามไทย</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    * {
-      box-sizing: border-box;
-    }
+        :root {
+            --coral: #FF6B4A;
+            --ocean: #006B8F;
+            --dark: #1d1d1f;
+            --gray: #86868b;
+            --light-gray: #f5f5f7;
+            --white: #ffffff;
+        }
 
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-    }
+        body {
+            font-family: 'SF Pro Display', 'Noto Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--dark);
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            overflow-x: hidden;
+        }
 
-    .container {
-      width: min(1200px, 100% - 2rem);
-      margin: 0 auto;
-    }
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            z-index: 9999;
+            transition: all 0.3s ease;
+        }
 
-    header {
-      background: linear-gradient(180deg, #ffffff 0%, #f5f5f7 100%);
-      border-bottom: 1px solid #d2d2d7;
-      position: sticky;
-      top: 0;
-      z-index: 50;
-    }
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+        }
 
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 0;
-    }
+        .nav-container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 44px;
+        }
 
-    .nav h1 {
-      margin: 0;
-      font-size: 1.25rem;
-      letter-spacing: 0.02em;
-      font-weight: 700;
-    }
+        .logo {
+            font-size: 21px;
+            font-weight: 600;
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    .nav-links {
-      display: flex;
-      gap: 1rem;
-      font-weight: 600;
-    }
+        .logo-icon {
+            font-size: 24px;
+        }
 
-    .nav-links a {
-      color: var(--text);
-      text-decoration: none;
-      opacity: 0.85;
-      transition: opacity .2s ease;
-    }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
 
-    .nav-links a:hover {
-      opacity: 1;
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 12px;
+            font-weight: 400;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
 
-    .hero {
-      text-align: center;
-      padding: 4rem 0 5rem;
-    }
+        .nav-links a:hover {
+            opacity: 1;
+        }
 
-    .hero h2 {
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      margin: 0;
-      letter-spacing: -0.03em;
-      font-weight: 700;
-    }
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 60px;
+            background: linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
 
-    .hero p {
-      margin: 1rem auto 2rem;
-      max-width: 700px;
-      color: var(--muted);
-      font-size: 1.15rem;
-    }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 107, 74, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 70%, rgba(0, 107, 143, 0.06) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
 
-    .hero .buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, -20px) rotate(2deg); }
+        }
 
-    .btn {
-      border-radius: 12px;
-      padding: 0.85rem 1.6rem;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      border: 1px solid transparent;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 165px;
-    }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 980px;
+        }
 
-    .btn-primary {
-      background: var(--text);
-      color: var(--white);
-      border-color: var(--text);
-    }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 107, 74, 0.1);
+            color: var(--coral);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
 
-    .btn-secondary {
-      background: rgba(0, 113, 227, 0.08);
-      color: var(--accent);
-      border-color: rgba(0, 113, 227, 0.3);
-    }
+        .hero h1 {
+            font-size: 80px;
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.015em;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--ocean) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-    .section {
-      padding: 3rem 0;
-    }
+        .hero-subtitle {
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--gray);
+            margin-bottom: 32px;
+            line-height: 1.3;
+        }
 
-    .section h3 {
-      font-size: clamp(1.6rem, 3vw, 2rem);
-      margin-bottom: 0.75rem;
-    }
+        .hero-description {
+            font-size: 21px;
+            color: var(--gray);
+            max-width: 680px;
+            margin: 0 auto 40px;
+            line-height: 1.5;
+        }
 
-    .section p {
-      color: var(--muted);
-      max-width: 760px;
-      margin-top: 0;
-    }
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-    .grid {
-      display: grid;
-      gap: 1.4rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      margin-top: 1.5rem;
-    }
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 17px;
+            font-weight: 400;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    .card {
-      background: var(--white);
-      border: 1px solid #d2d2d7;
-      border-radius: 18px;
-      padding: 1.25rem;
-      box-shadow: 0 8px 26px rgba(0,0,0,.08);
-      min-height: 240px;
-    }
+        .btn-primary {
+            background: var(--coral);
+            color: white;
+        }
 
-    .card h4 {
-      margin: 0 0 .6rem;
-      font-size: 1.1rem;
-    }
+        .btn-primary:hover {
+            background: #e55a3a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 107, 74, 0.3);
+        }
 
-    .card p {
-      margin: 0;
-      color: #444;
-      font-size: 0.96rem;
-      line-height: 1.4;
-    }
+        .btn-secondary {
+            background: transparent;
+            color: var(--ocean);
+            border: 2px solid var(--ocean);
+        }
 
-    .cards-large {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
+        .btn-secondary:hover {
+            background: var(--ocean);
+            color: white;
+        }
 
-    .feature {
-      background: var(--white);
-      border-radius: 20px;
-      border: 1px solid #d2d2d7;
-      padding: 1.5rem;
-      text-align: center;
-    }
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            padding: 60px 20px;
+            background: var(--white);
+        }
 
-    .feature h4 {
-      margin: 0.75rem 0 0.5rem;
-      font-size: 1.12rem;
-    }
+        .stat-item {
+            text-align: center;
+        }
 
-    .feature p { color: var(--muted); }
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--coral);
+            display: block;
+            line-height: 1;
+        }
 
-    .footer {
-      background: #fff;
-      border-top: 1px solid #d2d2d7;
-      padding: 2rem 0;
-      color: #636366;
-      font-size: 0.9rem;
-    }
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 8px;
+        }
 
-    .footer .foot-grid {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    }
+        /* Section Common */
+        section {
+            padding: 100px 20px;
+        }
 
-    .footer a {
-      color: #636366;
-      text-decoration: none;
-      display: block;
-      padding: 0.18rem 0;
-    }
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
 
-    @media (max-width: 728px) {
-      .hero { padding: 3rem 1rem 4rem; }
-      .nav { flex-wrap: wrap; gap: 0.7rem; }
-      .nav-links { justify-content: center; width: 100%; }
-    }
-  </style>
+        .section-header h2 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .section-header p {
+            font-size: 21px;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        /* Why Shrimp Section */
+        .why-shrimp {
+            background: var(--light-gray);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 48px;
+            border-radius: 24px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
+        }
+
+        .benefit-icon {
+            font-size: 56px;
+            margin-bottom: 24px;
+        }
+
+        .benefit-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .benefit-card p {
+            font-size: 17px;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        .highlight-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--coral);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Products Section */
+        .products {
+            background: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: var(--light-gray);
+            border-radius: 28px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: scale(1.02);
+        }
+
+        .product-image {
+            height: 320px;
+            background: linear-gradient(135deg, rgba(255, 107, 74, 0.1) 0%, rgba(0, 107, 143, 0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            position: relative;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--coral);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .product-info {
+            padding: 32px;
+        }
+
+        .product-info h3 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .product-info .subtitle {
+            font-size: 15px;
+            color: var(--gray);
+            margin-bottom: 16px;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .product-features li {
+            padding: 8px 0;
+            font-size: 15px;
+            color: var(--dark);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-features li:last-child {
+            border-bottom: none;
+        }
+
+        .check {
+            color: var(--coral);
+            font-weight: 600;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .product-price span {
+            font-size: 15px;
+            color: var(--gray);
+            font-weight: 400;
+        }
+
+        /* Sustainability Section */
+        .sustainability {
+            background: linear-gradient(135deg, var(--ocean) 0%, #004d6b 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .sustainability .section-header h2,
+        .sustainability .section-header p {
+            color: white;
+        }
+
+        .sustainability .section-header p {
+            opacity: 0.9;
+        }
+
+        .sustainability-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .sustain-item {
+            padding: 40px;
+        }
+
+        .sustain-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .sustain-item h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .sustain-item p {
+            font-size: 17px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* Trust Section */
+        .trust {
+            background: white;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .trust-item {
+            padding: 20px;
+        }
+
+        .trust-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+        }
+
+        .trust-item h3 {
+            font-size: 21px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .trust-item p {
+            font-size: 17px;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--light-gray);
+            text-align: center;
+            padding: 120px 20px;
+        }
+
+        .cta h2 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .cta p {
+            font-size: 21px;
+            color: var(--gray);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .line-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 16px 28px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-top: 32px;
+        }
+
+        .line-badge span {
+            font-size: 17px;
+            color: var(--dark);
+        }
+
+        .line-id {
+            font-size: 21px;
+            font-weight: 600;
+            color: var(--ocean);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--light-gray);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        footer p {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero-subtitle {
+                font-size: 21px;
+            }
+
+            .hero-description {
+                font-size: 17px;
+            }
+
+            .section-header h2,
+            .cta h2 {
+                font-size: 36px;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <h1>CuCat</h1>
-      <nav class="nav-links" aria-label="Main navigation">
-        <a href="#products">Products</a>
-        <a href="#quality">Quality</a>
-        <a href="#stories">Stories</a>
-        <a href="#support">Support</a>
-      </nav>
-    </div>
-  </header>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">🦐</span>
+                CuCat
+            </a>
+            <ul class="nav-links">
+                <li><a href="#why">ทำไมต้องกุ้ง</a></li>
+                <li><a href="#products">สินค้า</a></li>
+                <li><a href="#sustain">ความยั่งยืน</a></li>
+                <li><a href="#contact">ติดต่อ</a></li>
+            </ul>
+        </div>
+    </nav>
 
-  <main>
+    <!-- Hero Section -->
     <section class="hero">
-      <div class="container">
-        <h2>Elevate Pet Care with Premium Nutrition</h2>
-        <p>Discover CuCat’s chef-crafted, veterinarian-formulated foods that balance taste, health, and sustainability for your cat and dog.</p>
-        <div class="buttons">
-          <a class="btn btn-primary" href="#products">Shop Now</a>
-          <a class="btn btn-secondary" href="#quality">Learn More</a>
+        <div class="hero-content">
+            <div class="hero-badge">
+                🇹🇭 อาหารแมวจากกุ้งก้ามกรามไทย 100%
+            </div>
+            <h1>CuCat</h1>
+            <p class="hero-subtitle">โปรตีนกุ้งไทย ที่แมวคุณจะรัก</p>
+            <p class="hero-description">
+                Taurine สูงกว่าไก่ 3 เท่า · Hypoallergenic · ย่อยง่าย 92-95% ·<br>
+                จาก by-products บ่อกุ้งไทย สู่อาหารแมวพรีเมียมระดับโลก
+            </p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn btn-primary">สั่งซื้อเลย</a>
+                <a href="#why" class="btn btn-secondary">รู้จัก CuCat</a>
+            </div>
         </div>
-      </div>
     </section>
 
-    <section id="products" class="section container">
-      <h3>Featured Collections</h3>
-      <p>From protein-rich dry kibble to gentle wet recipes, every product is designed to support lively energy, gut health, and glossy skin.</p>
-      <div class="grid">
-        <div class="card">
-          <h4>Ocean Breeze Salmon Blend</h4>
-          <p>Wild-caught salmon, quinoa, and blueberries to support omega balance and joint mobility.</p>
+    <!-- Stats Section -->
+    <div class="stats">
+        <div class="stat-item">
+            <span class="stat-number">3x</span>
+            <span class="stat-label">Taurine สูงกว่าไก่</span>
         </div>
-        <div class="card">
-          <h4>Grass-Fed Beef + Sweet Potato</h4>
-          <p>High-protein formula for active pets, with prebiotic fiber for digestive wellness.</p>
+        <div class="stat-item">
+            <span class="stat-number">92%</span>
+            <span class="stat-label">Digestibility</span>
         </div>
-        <div class="card">
-          <h4>Sensitive Skin Chicken Recipe</h4>
-          <p>Limited ingredient recipe with pasture-raised chicken and natural zinc for less itch and more comfort.</p>
+        <div class="stat-item">
+            <span class="stat-number">#1</span>
+            <span class="stat-label">ผู้ผลิตกุ้งก้ามกรามโลก</span>
         </div>
-        <div class="card">
-          <h4>Indoor Comfort Turkey Stew</h4>
-          <p>Steamy, low-calorie meal with added taurine and vitamin E for indoor cats and small dogs.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="quality" class="section" style="background:#fff;">
-      <div class="container">
-        <h3>Quality You Can Trust</h3>
-        <p>CuCat is built on premium ingredients, transparent sourcing, and science-backed nutritional profiles.</p>
-        <div class="cards-large">
-          <article class="feature">
-            <h4>Farm Fresh Sourcing</h4>
-            <p>Local farmers and ethical fisheries supply our whole-protein sources and superfood blends.</p>
-          </article>
-          <article class="feature">
-            <h4>Clean Label Philosophy</h4>
-            <p>No artificial colors, flavors, or preservatives. Only recognizable, pet-friendly ingredients.</p>
-          </article>
-          <article class="feature">
-            <h4>Lab Tested Safety</h4>
-            <p>Every batch undergoes independent lab testing for purity, nutrients, and kibbles that keep pets thriving.</p>
-          </article>
-          <article class="feature">
-            <h4>Vet and Behaviorist Approved</h4>
-            <p>Formulas created with pet health professionals to address growth, weight, and digestive needs.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="stories" class="section">
-      <div class="container">
-        <h3>Stories from Happy Homes</h3>
-        <p>Read how CuCat food transformed the daily lives and wellbeing of pets around the globe.</p>
-        <div class="grid">
-          <div class="card">
-            <h4>“My cat is more playful than ever.”</h4>
-            <p>Mia and her tabby reported better digestion and shinier coat within two weeks of switching to CuCat.</p>
-          </div>
-          <div class="card">
-            <h4>“No more upset stomachs.”</h4>
-            <p>Levi found the ideal formula for his sensitive pup, and mealtime is calm and happy again.</p>
-          </div>
-          <div class="card">
-            <h4>“Sustainable packaging is a win.”</h4>
-            <p>Reusable pouches and fiberboard boxes make me feel good about how I feed my dog and the planet.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="support" class="section" style="background:linear-gradient(180deg, #fff 0%, #f2f2f7 100%);">
-      <div class="container">
-        <h3>Get Personalized Pet Care</h3>
-        <p>Free nutrition consultation with every first purchase. Create a feeding plan that fits your pet’s age, size, and activity level.</p>
-        <a class="btn btn-primary" href="#">Book a Consultation</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container foot-grid">
-      <div>
-        <h4 style="margin:0 0 0.4rem; color:#1d1d1f;">CuCat</h4>
-        <a href="#">About Us</a>
-        <a href="#">Careers</a>
-        <a href="#">Sustainability</a>
-      </div>
-      <div>
-        <h4 style="margin:0 0 0.4rem; color:#1d1d1f;">Support</h4>
-        <a href="#">Help Center</a>
-        <a href="#">Shipping</a>
-        <a href="#">Returns</a>
-      </div>
-      <div>
-        <h4 style="margin:0 0 0.4rem; color:#1d1d1f;">Products</h4>
-        <a href="#">Dry Food</a>
-        <a href="#">Wet Food</a>
-        <a href="#">Treats</a>
-      </div>
-      <div>
-        <h4 style="margin:0 0 0.4rem; color:#1d1d1f;">Legal</h4>
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-        <a href="#">Compliance</a>
-      </div>
     </div>
-    <div style="padding-top:1.4rem; border-top:1px solid #d2d2d7; margin-top:1rem; color:#8e8e93;">
-      © 2026 CuCat Pet Care. All rights reserved.
-    </div>
-  </footer>
+
+    <!-- Why Shrimp Section -->
+    <section class="why-shrimp" id="why">
+        <div class="section-header">
+            <h2>ทำไมต้องกุ้งก้ามกราม?</h2>
+            <p>โปรตีนจากกุ้งก้ามกรามไทยคือ superfood ที่ธรรมชาติสร้างมาเพื่อแมวโดยเฉพาะ</p>
+        </div>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <span class="highlight-number">3x</span>
+                <h3>Taurine จากธรรมชาติ</h3>
+                <p>กุ้งมี Taurine สูงถึง 120-180 mg/100g สูงกว่าไก่ 3 เท่า ช่วยให้หัวใจแข็งแรง และสายตาชัดเจน</p>
+            </div>
+            <div class="benefit-card">
+                <span class="highlight-number">92%</span>
+                <h3>ย่อยง่าย ซึมเร็ว</h3>
+                <p>Enzymatic Hydrolysis ย่อยโปรตีนเป็น peptides ขนาดเล็ก ย่อยง่าย ไม่ท้องเสีย</p>
+            </div>
+            <div class="benefit-card">
+                <span class="benefit-icon">🛡️</span>
+                <h3>Hypoallergenic</h3>
+                <p>สกัดด้วยเอนไซม์ธรรมชาติ ลดโอกาสแพ้ เหมาะสำหรับแมวผิวแห้ง คัน หรือท้องเสียบ่อย</p>
+            </div>
+            <div class="benefit-card">
+                <span class="benefit-icon">🌿</span>
+                <h3>Low Fat</h3>
+                <p>ไขมันต่ำเพียง 0.8-1.5% เหมาะกับแมวควบคุมน้ำหนัก หรือแมวสูงวัย</p>
+            </div>
+            <div class="benefit-card">
+                <span class="benefit-icon">🦐</span>
+                <h3>Umami ธรรมชาติ</h3>
+                <p>รสชาติจาก amino acids และ nucleotides ธรรมชาติ แมว picky ก็กินหมดถ้วย</p>
+            </div>
+            <div class="benefit-card">
+                <span class="benefit-icon">♻️</span>
+                <h3>Circular Economy</h3>
+                <p>ใช้ by-products จากบ่อกุ้งไทย ลดขยะ สร้าง value ให้เกษตรกรไทย</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-header">
+            <h2>สินค้าของเรา</h2>
+            <p>Wet food สูตรพิเศษจากโปรตีนกุ้งก้ามกรามไทย</p>
+        </div>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    🦐
+                    <span class="product-badge">BEST SELLER</span>
+                </div>
+                <div class="product-info">
+                    <h3>กุ้งล้านแปด</h3>
+                    <p class="subtitle">Shrimp Delight Formula</p>
+                    <ul class="product-features">
+                        <li><span class="check">✓</span> Shrimp Hydrolysate 40%</li>
+                        <li><span class="check">✓</span> Taurine ธรรมชาติสูง</li>
+                        <li><span class="check">✓</span> Omega-3 จากปลาแซลมอน</li>
+                        <li><span class="check">✓</span> ไม่มีสารปรุงแต่ง</li>
+                    </ul>
+                    <div class="product-price">฿49 <span>/ ซอง (85g)</span></div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    🐱
+                    <span class="product-badge">NEW</span>
+                </div>
+                <div class="product-info">
+                    <h3>กุ้งผสมไก่</h3>
+                    <p class="subtitle">Shrimp & Chicken Blend</p>
+                    <ul class="product-features">
+                        <li><span class="check">✓</span> Shrimp + Chicken สัดส่วนพอดี</li>
+                        <li><span class="check">✓</span> ราคาเข้าถึงง่ายขึ้น</li>
+                        <li><span class="check">✓</span> Palatability สูงสุด</li>
+                        <li><span class="check">✓</span> สำหรับแมวเปลี่ยนอาหาร</li>
+                    </ul>
+                    <div class="product-price">฿39 <span>/ ซอง (85g)</span></div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    🎀
+                    <span class="product-badge">PREMIUM</span>
+                </div>
+                <div class="product-info">
+                    <h3>กุ้งแท้ 100%</h3>
+                    <p class="subtitle">Single Protein Formula</p>
+                    <ul class="product-features">
+                        <li><span class="check">✓</span> Single Protein Source</li>
+                        <li><span class="check">✓</span> Limited Ingredients</li>
+                        <li><span class="check">✓</span> Pumpkin + Cranberry</li>
+                        <li><span class="check">✓</span> Probiotics เพิ่ม</li>
+                    </ul>
+                    <div class="product-price">฿59 <span>/ ซอง (85g)</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sustainability Section -->
+    <section class="sustainability" id="sustain">
+        <div class="section-header">
+            <h2>จากท้องถิ่น สู่ความยั่งยืน</h2>
+            <p>เราเชื่อว่าอาหารแมวที่ดีต้องไม่ทำร้ายโลก</p>
+        </div>
+        <div class="sustainability-grid">
+            <div class="sustain-item">
+                <div class="sustain-icon">🦐</div>
+                <h3>Local Sourcing</h3>
+                <p>ไทยคือผู้ผลิตกุ้งก้ามกรามอันดับ 1 ของโลก เราใช้วัตถุดิบจากบ่อในประเทศ 100%</p>
+            </div>
+            <div class="sustain-item">
+                <div class="sustain-icon">♻️</div>
+                <h3>Upcycling</h3>
+                <p>เปลี่ยน by-products ที่เหลือจากการคัดขนาด เป็นโปรตีนคุณภาพสูง ลดขยะอุตสาหกรรม</p>
+            </div>
+            <div class="sustain-item">
+                <div class="sustain-icon">👨‍🌾</div>
+                <h3>Support Local</h3>
+                <p>สร้างรายได้ให้เกษตรกรไทย ยกระดับมูลค่าผลิตผลจากท้องถิ่น</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust">
+        <div class="section-header">
+            <h2>คุณภาพที่คุณไว้ใจได้</h2>
+            <p>ทุกซองผ่านการควบคุมคุณภาพอย่างเข้มงวด</p>
+        </div>
+        <div class="trust-grid">
+            <div class="trust-item">
+                <div class="trust-icon">🎓</div>
+                <h3>คำแนะนำจาก ม.เกษตร</h3>
+                <p>พัฒนาสูตรร่วมกับอาจารย์ผู้เชี่ยวชาญจากมหาวิทยาลัยเกษตรศาสตร์</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🏭</div>
+                <h3>By-products คุณภาพ</h3>
+                <p>คัดสรรจากบ่อกุ้งที่ได้มาตรฐาน GAP สดใหม่ทุกวัน</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🧪</div>
+                <h3>Enzymatic Hydrolysis</h3>
+                <p>สกัดด้วยเอนไซม์ธรรมชาติ ไม่ใช้ความร้อนสูง คงคุณค่าทางโภชนาการ</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🐱</div>
+                <h3>Tested by Real Cats</h3>
+                <p>ทดสอบ palatability และ digestibility กับแมวจริงก่อนขาย</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <h2>พร้อมให้แมวคุณลองกุ้งล้านแปด?</h2>
+        <p>สั่งซื้อผ่าน Line Official ของเรา มีโปรโมชั่นพิเศษสำหรับลูกค้าใหม่</p>
+        <a href="#products" class="btn btn-primary">สั่งซื้อเลย</a>
+        <div class="line-badge">
+            <span>💬 Line ID:</span>
+            <span class="line-id">@cucat</span>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 CuCat Thailand. All rights reserved. | อาหารแมวจากกุ้งก้ามกรามไทย 🇹🇭</p>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
